@@ -1,8 +1,9 @@
+// Fix duplicate operators being entered
+
 /* Variables */
 let previousNum = "";
 let currentNum = "";
 let operation = "";
-
 /* Numbers */
 let numbers = document.getElementsByClassName("number");
 
@@ -28,13 +29,15 @@ let operators = document.getElementsByClassName("operator");
 
 for (let op of operators) {
   op.addEventListener("click", function () {
-    previousNum = currentNum;
-    currentNum = "";
-    operation = op.value;
-    display.textContent = operation;
-    console.log("previousNum = " + previousNum);
-    console.log("operation = " + operation);
-    console.log("currentNum = " + currentNum);
+    if (operation == "") {
+      previousNum = currentNum;
+      currentNum = "";
+      operation = op.value;
+      display.textContent = operation;
+      console.log("previousNum = " + previousNum);
+      console.log("operation = " + operation);
+      console.log("currentNum = " + currentNum);
+    }
   });
 }
 
@@ -53,6 +56,7 @@ document.getElementById("equals").addEventListener("click", function () {
   if (operation == "/") {
     currentNum = parseFloat(previousNum) / parseFloat(currentNum);
   }
+  operation = "";
   display.textContent = currentNum;
 });
 
